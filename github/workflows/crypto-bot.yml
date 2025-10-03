@@ -1,0 +1,25 @@
+name: Crypto Bot Runner
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Har 30 minute mein run hoga
+  workflow_dispatch:  # Manual run karne ka option
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Run Crypto Bot
+      run: node index.js
